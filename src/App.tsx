@@ -1,9 +1,27 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import './App.css'
+
+import { Link } from 'react-router-dom'
+
 
 function App() {
   return (
     <div className="App">
+      <nav
+        style={{
+          borderBottom: 'solid 1px',
+          paddingBottom: '1rem',
+          fontSize: '20pt',
+        }}
+      >
+        <Link to="/home">Home</Link>
+        {'  '}
+        <Link to="/about">About</Link>
+        {'  '}
+        <Link to="/user">User</Link>
+      </nav>
+
+      
       <header className="App-header">
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -18,7 +36,7 @@ function App() {
         </a>
       </header>
     </div>
-  );
+  )
 }
 
 export default App;
