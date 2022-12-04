@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { BrowserRouter as Routes, Route, Link } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
 
 interface Ihome {
    homeTitle: string;
@@ -17,6 +18,7 @@ const Home = (props: Ihome) => {
    }, [docTitle, counter]);
 
    return (
+      <ChakraProvider>
       <div>
          <nav
             style={{
@@ -32,8 +34,16 @@ const Home = (props: Ihome) => {
             {"  "}
             <Link to="/user">User</Link>
          </nav>
-
          <h2>{titleOfPage}</h2>
+         Want to change the title of this page? New title{" "}
+         <input
+            type="text"
+            placeholder="changeTitleOfthePage"
+            value={titleOfPage}
+            onChange={(e) => setTitleOfPage(e.target.value)}
+         />
+         <br />
+         <br />
          <div>
             <img src="/images/homedecor.jpg" height={"300px"} alt=" " />
             <br />
@@ -66,15 +76,6 @@ const Home = (props: Ihome) => {
             </p>
             <br />
             <br />
-            Want to change the title of this page? New title{" "}
-            <input
-               type="text"
-               placeholder="changeTitleOfthePage"
-               value={titleOfPage}
-               onChange={(e) => setTitleOfPage(e.target.value)}
-            />
-            <br />
-            <br />
             Want to change the document title to this page title?
             <button
                onClick={() => {
@@ -84,17 +85,16 @@ const Home = (props: Ihome) => {
             >
                Enter
             </button>
-            <Seat backgroundColor="red" />
             <br />
             <br />
             <p>You have change the document title {counter} times </p>
-            <br />
-            <br />
+            <Seat backgroundColor="red" />
             <Link to="/" type="button" className="btn btn-dark">
                Back
             </Link>
          </div>
       </div>
+      </ChakraProvider>
    );
 };
 
@@ -103,7 +103,9 @@ interface Iseat {
 }
 
 const Seat = (props: Iseat) => {
-   return <div>This is a {props.backgroundColor} seat inside the car.</div>;
+   return (
+      <h3 style={{ color: props.backgroundColor }}>This is a child element.</h3>
+   );
 };
 
 export default Home;
