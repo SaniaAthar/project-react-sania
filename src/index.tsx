@@ -16,7 +16,7 @@ root.render(
       <Routes>
          <Route path="/" element={<App />} />
 
-         <Route path="home" element={<Home homeTitle="Home Deco" backgroundColor="orange"/>} />
+         <Route path="home" element={<Home homeTitle="Home Deco" backgroundColor="#0BC5EA"/>} />
          <Route path="about" element={<About />} />
          <Route path="user" element={<User />} />
       </Routes>
