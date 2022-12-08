@@ -44,7 +44,7 @@ const Home = (props: Ihome) => {
             </nav>
             <div className="Common">
             <br />
-            <Heading as="h3" size="md">
+            <Heading as="h3" size="lg">
                {titleOfPage}
             </Heading>
             <br />

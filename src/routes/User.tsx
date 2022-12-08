@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-
-import { Link } from "react-router-dom";
+import "./Common.css";
+import { ChakraProvider, Heading, Input, Button, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
 
 const User = () => {
    const [userComment, setUserComment] = useState(
@@ -17,84 +18,121 @@ const User = () => {
    useEffect(() => {}, [showComment, showAdress]);
 
    return (
-      <div>
-         <nav
-            style={{
-               borderBottom: "solid 1px",
-               paddingBottom: "1rem",
-               fontSize: "20pt",
-               background: "pink",
-            }}
-         >
-            <Link to="/home">Home</Link>
-            {"  "}
-            <Link to="/about">About</Link>
-            {"  "}
-            <Link to="/user">User</Link>
-         </nav>
-         <h2>Users</h2>
-         <p>
-            Your feedback is valuable to us. It helps greatly in improving our
-            product and services.
-         </p>
-         <p>
-            For any suggestion and comments, please write to us{" "}
-            <a href="mailto:info@gcm-decor.co.uk">feedback@homedecor.com.</a> or
-            directly write on this page below
-         </p>
-         <br />
-         <br />
-         <button
-            onClick={() => {
-               setShowAdress(!showAdress);
-            }}
-         >
-            Show and hide adress
-         </button>
-         {showAdress && (
-            <div>
-               {" "}
-               <h4>Your homedeco solution</h4>
-               <p>Emmylundsvagen 3 Solna</p> <p>SE-10023 Stockholm</p>{" "}
+      <ChakraProvider>
+         <div>
+            <nav
+               style={{
+                  borderBottom: "solid 1px",
+                  paddingBottom: "1rem",
+                  fontSize: "20pt",
+                  background: "pink",
+               }}
+            >
+               <Link as={NextLink} href="/home">
+                  Home
+               </Link>
+               {"  "}
+               <Link as={NextLink} href="/about">
+                  About
+               </Link>
+               {"  "}
+               <Link as={NextLink} href="/user">
+                  User
+               </Link>
+            </nav>
+            <div className="Common">
+               <Heading as="h3" size="lg">
+                  Users
+               </Heading>
+               <br />
+               <p style={{ width: "1100px", textAlign: "justify" }}>
+                  In case of any issues with our products, please contact us
+                  support@homedecor.com with the product details. To arrange a
+                  free no obligation quotation or to discuss your project please
+                  contact quotation@homedecor.com. we aim to respond to your
+                  enquiry within 24 hours.
+               </p>
+               <br />
+               <Button
+                  colorScheme="facebook"
+                  size="sm"
+                  onClick={() => {
+                     setShowAdress(!showAdress);
+                  }}
+               >
+                  Show and hide address
+               </Button>
+
+               {showAdress && (
+                  <div>
+                     {" "}
+                     <h4>Your homedeco solution</h4>
+                     <p>Emmylundsvagen 3 Solna</p> <p>SE-10023 Stockholm</p>{" "}
+                  </div>
+               )}
+               <br />
+               <br />
+               <p style={{ width: "1100px", textAlign: "justify" }}>
+                  Your feedback is valuable to us. It helps greatly in improving
+                  our product and services. For any suggestion and comments,
+                  please write to us{" "}
+                  <a href="mailto:info@gcm-decor.co.uk">
+                     feedback@homedecor.com.
+                  </a>{" "}
+                  or directly write on this page below
+               </p>
+               <br />
+               <Heading as="h5" size="sm">
+                  Feedback and comments:
+               </Heading>
+               <Input
+                  style={{textAlign: "start", height: "100px", width: "400px" }}
+                  type="text"
+                  color="teal"
+                  focusBorderColor="pink.400"
+                  placeholder="changeTitleOfthePage"
+                  value={userComment}
+                  onChange={(e) => setUserComment(e.target.value)}
+               />
+               <br />
+               <br />
+               <Button
+               colorScheme="teal"
+               size="sm"
+                  onClick={() => {
+                     setShowComment(true);
+                     setUserCommentCollection(
+                        userCommentCollection + userComment + "<tbr>"
+                     );
+                  }}
+               >
+                  Add comment
+               </Button>
+               {showComment && (
+                  <p>
+                     {userCommentCollection
+                        .split("<tbr>")
+                        .map((arrayItem, index) => {
+                           const myString =
+                              `${index + 1}. ` + arrayItem.toString();
+                           return <p>{myString}</p>;
+                        })}
+                  </p>
+               )}
+
+               <br />
+               <br />
+               <Link
+                  as={NextLink}
+                  href="/"
+                  type="Button"
+                  style={{ color: "#D53F8C", fontSize: "18pt" }}
+               >
+                  Back
+               </Link>
             </div>
-         )}
-
-         <br />
-         <br />
-         <h4>Comments and feedbacks</h4>
-         <input
-            style={{ height: "100px", width: "400px" }}
-            type="text"
-            placeholder="changeTitleOfthePage"
-            value={userComment}
-            onChange={(e) => setUserComment(e.target.value)}
-         />
-         <br />
-         <button
-            onClick={() => {
-               setShowComment(true);
-               setUserCommentCollection(
-                  userCommentCollection + userComment + "<tbr>"
-               );
-            }}
-         >
-            Add comment
-         </button>
-         {showComment && (
-            <p>
-               {userCommentCollection.split("<tbr>").map((arrayItem, index) => {
-                  const myString = `${index + 1}. ` + arrayItem.toString();
-                  return <p>{myString}</p>;
-               })}
-            </p>
-         )}
-
-         <br />
-         <br />
-         <Link to="/" type="button" className="btn btn-dark">
-            Back
-         </Link>
-      </div>
+         </div>
+      </ChakraProvider>
    );
 };
 
